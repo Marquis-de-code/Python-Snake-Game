@@ -1,6 +1,7 @@
 import random
 from point2D import Point2D
 
+
 class Snake:
 
     def __init__(self, width, height):
@@ -42,12 +43,12 @@ class Snake:
 
     # Method to update the position of the snake based on it's next direction
     def move(self):
-        if self.next_direction != None:
+        if self.next_direction:
             direction_to_coords = {
-            'Up': Point2D(self.body[0].x, self.body[0].y - 1),
-            'Right': Point2D(self.body[0].x + 1, self.body[0].y),
-            'Down': Point2D(self.body[0].x, self.body[0].y + 1),
-            'Left': Point2D(self.body[0].x - 1, self.body[0].y)
+                'Up': Point2D(self.body[0].x, self.body[0].y - 1),
+                'Right': Point2D(self.body[0].x + 1, self.body[0].y),
+                'Down': Point2D(self.body[0].x, self.body[0].y + 1),
+                'Left': Point2D(self.body[0].x - 1, self.body[0].y)
             }
             if len(self.body) == self.length:
                 self.body.pop()
@@ -74,8 +75,8 @@ class Snake:
     def body_segment_canvas_coords(self, index, px_offset, px_size):
         x = self.body[index].x * px_size+px_offset
         y = self.body[index].y * px_size+px_offset
-        return (x+self.RELATIVE_OFFSET, y+self.RELATIVE_OFFSET,\
-            x+px_size-self.RELATIVE_OFFSET, y+px_size-self.RELATIVE_OFFSET)
+        return (x+self.RELATIVE_OFFSET, y+self.RELATIVE_OFFSET, x+px_size-self.RELATIVE_OFFSET,
+                y+px_size-self.RELATIVE_OFFSET)
 
     def score(self):
         return str(self.length // self.LENGTH_INCREMENT - 1)
@@ -88,7 +89,7 @@ class Snake:
             if i > len(self.body_IDs)-1:
                 self.body_IDs.append(canvas.create_oval(coords, fill='white'))
             else:
-                canvas.coords(self.body_IDs[i],coords)
+                canvas.coords(self.body_IDs[i], coords)
 
     def __str__(self):
         return 'Snake: x=' + str(self.body[0].x) + ', y=' + str(self.body[0].y)
